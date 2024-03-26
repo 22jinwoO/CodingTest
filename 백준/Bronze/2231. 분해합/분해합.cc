@@ -19,7 +19,7 @@ int main()
     for (int i = 0; i < m; i++)
     {
         str = to_string(i);
-
+        answer = 0;
         for (int j = 0; j < str.size(); j++)
         {
             answer += str[j]-'0';
