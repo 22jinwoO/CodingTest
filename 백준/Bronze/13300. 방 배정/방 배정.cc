@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int main() {
@@ -7,53 +6,34 @@ int main() {
     cin.tie(0);
 
     int n, k;
-
     cin >> n >> k;
-    
+
+    // 성별(0: 여, 1: 남) x 학년(1~6)
     vector<vector<int>> v(2, vector<int>(6, 0));
 
-    for(int i = 0; i < n; i++)
-    {
-        // 성별
-        int s = 0;
-
-        // 학년
-        int y = 0;
-
+    for (int i = 0; i < n; i++) {
+        int s, y;
         cin >> s >> y;
 
-        // 배열 크기 때문에 학년 --
-        y--;
-
-        // 해당 학년 성별 카운팅
+        // 학년을 0부터 시작하도록 조정
+        y--; 
+        
         v[s][y]++;
     }
 
     int cnt = 0;
-    
-    // 1학년부터 6학년까지 방 개수 카운팅ㅋ
-    for (int i = 0; i < v.size(); i++) 
-    { 
-        // 학년 기준
-        for(int j = 0; j < v[i].size(); j++)
-        {
-            // 방 최대 인원 수에 맞게 떨어진다면 cnt 반영
-            if(v[i][j] % k == 0) cnt += v[i][j] / k;
 
-            // 방 최대 인원 수에 딱 맞지 않게 떨어진다면
-            else
-            {
-                
-                while(v[i][j] > k)
-                {
-                    v[i][j] /= k;
-                    cnt++;
-                }
-
-                cnt++;
-            }
+    // 방 개수 계산
+    for (int i = 0; i < 2; i++) 
+    {         
+        // 성별 기준
+        for (int j = 0; j < 6; j++) 
+        {     // 학년 기준
+            if (v[i][j] > 0) cnt += (v[i][j] + k - 1) / k;  // 방 개수 계산
         }
     }
 
-    cout << cnt;
+    cout << cnt << '\n';
+    
+    return 0;
 }
